@@ -1,0 +1,5 @@
+name: elysium-chat-wayward
+author: alyphen
+version: @version@
+main: com.seventh_root.elysium.chat.wayward.ElysiumChatWayward
+depend: [WaywardLib, elysium-chat-bukkit]

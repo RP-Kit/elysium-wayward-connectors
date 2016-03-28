@@ -1,0 +1,100 @@
+import org.apache.tools.ant.filters.*
+
+group 'com.seventh-root'
+version '0.1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+allprojects {
+    apply plugin: "java"
+    apply plugin: "maven"
+    group = "com.seventh-root"
+    version = "0.1.0"
+}
+
+subprojects {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven {
+            url "https://hub.spigotmc.org/nexus/content/groups/public/"
+        }
+        maven {
+            url "https://repo.seventh-root.com/repository/internal/"
+        }
+    }
+}
+
+File propertiesFile = new File("repo.properties")
+Properties properties = new Properties()
+properties.load(new FileInputStream(propertiesFile))
+def repoUserName = properties.getProperty("repo-username")
+def repoPassword = properties.getProperty("repo-password")
+
+project(":elysium-characters-wayward") {
+
+    dependencies {
+        compile group: "net.wayward-realms", name: "waywardlib", version: "0.12.2"
+        compile group: "com.seventh-root", name: "elysium-characters-bukkit", version: "0.1.0"
+    }
+
+    processResources {
+        filter ReplaceTokens, tokens: [
+                "version": version
+        ]
+    }
+
+    artifacts {
+        archives jar
+    }
+
+    uploadArchives {
+        repositories.mavenDeployer {
+
+            repository(url: "https://repo.seventh-root.com/repository/internal/") {
+                authentication(userName: repoUserName, password: repoPassword)
+            }
+
+            pom.version = project(":elysium-characters-wayward").version
+            pom.artifactId = project(":elysium-characters-wayward").name
+            pom.groupId = project(":elysium-characters-wayward").group
+
+        }
+    }
+
+}
+
+project(":elysium-chat-wayward") {
+
+    dependencies {
+        compile group: "net.wayward-realms", name: "waywardlib", version: "0.12.2"
+        compile group: "com.seventh-root", name: "elysium-chat-bukkit", version: "0.1.0"
+    }
+
+    processResources {
+        filter ReplaceTokens, tokens: [
+                "version": version
+        ]
+    }
+
+    artifacts {
+        archives jar
+    }
+
+    uploadArchives {
+        repositories.mavenDeployer {
+
+            repository(url: "https://repo.seventh-root.com/repository/internal/") {
+                authentication(userName: repoUserName, password: repoPassword)
+            }
+
+            pom.version = project(":elysium-chat-wayward").version
+            pom.artifactId = project(":elysium-chat-wayward").name
+            pom.groupId = project(":elysium-chat-wayward").group
+
+        }
+    }
+
+}

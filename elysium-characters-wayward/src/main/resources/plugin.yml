@@ -1,0 +1,5 @@
+name: elysium-characters-wayward
+author: alyphen
+version: @version@
+main: com.seventh_root.elysium.characters.wayward.ElysiumCharactersWayward
+depend: [WaywardLib, elysium-characters-bukkit]

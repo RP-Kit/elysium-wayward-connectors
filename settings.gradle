@@ -1,0 +1,5 @@
+rootProject.name = 'elysium-wayward-connectors'
+include 'elysium-characters-wayward'
+include 'elysium-chat-wayward'
+include 'elysium-chat-wayward'
+
