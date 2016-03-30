@@ -42,7 +42,7 @@ class ElysiumCharactersWayward : JavaPlugin(), CharacterPlugin {
         if (elysiumCharacter != null)
             return CharacterWrapper(this, elysiumCharacter)
         else
-            return null
+            return createNewCharacter(player)
     }
 
     override fun setActiveCharacter(player: Player, character: Character) {
