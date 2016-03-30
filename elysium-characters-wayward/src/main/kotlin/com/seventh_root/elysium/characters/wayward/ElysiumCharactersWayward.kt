@@ -39,10 +39,15 @@ class ElysiumCharactersWayward : JavaPlugin(), CharacterPlugin {
     override fun getActiveCharacter(player: OfflinePlayer): Character {
         val elysiumPlayer = elysiumPlayerProvider!!.getPlayer(player)
         val elysiumCharacter = elysiumCharacterProvider!!.getActiveCharacter(elysiumPlayer)
-        if (elysiumCharacter != null)
+        if (elysiumCharacter != null) {
             return CharacterWrapper(this, elysiumCharacter)
-        else
-            return createNewCharacter(player)
+        } else {
+            val character = createNewCharacter(player)
+            if (player.isOnline) {
+                setActiveCharacter(player.player, character)
+            }
+            return character
+        }
     }
 
     override fun setActiveCharacter(player: Player, character: Character) {
