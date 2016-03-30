@@ -36,13 +36,13 @@ class ElysiumCharactersWayward : JavaPlugin(), CharacterPlugin {
         elysiumRaceProvider = elysiumCharactersBukkit!!.core!!.serviceManager.getServiceProvider(BukkitRaceProvider::class.java)
     }
 
-    override fun getActiveCharacter(player: OfflinePlayer): Character? {
+    override fun getActiveCharacter(player: OfflinePlayer): Character {
         val elysiumPlayer = elysiumPlayerProvider!!.getPlayer(player)
         val elysiumCharacter = elysiumCharacterProvider!!.getActiveCharacter(elysiumPlayer)
         if (elysiumCharacter != null)
             return CharacterWrapper(this, elysiumCharacter)
         else
-            return null
+            return createNewCharacter(player)
     }
 
     override fun setActiveCharacter(player: Player, character: Character) {
