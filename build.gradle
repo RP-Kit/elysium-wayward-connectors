@@ -1,17 +1,10 @@
 import org.apache.tools.ant.filters.*
 
-group 'com.seventh-root'
-version '0.1.0-SNAPSHOT'
-
-apply plugin: 'java'
-
-sourceCompatibility = 1.8
-
 allprojects {
-    apply plugin: "java"
+    apply plugin: "kotlin"
     apply plugin: "maven"
     group = "com.seventh-root"
-    version = "0.1.0"
+    version = "0.1.1-SNAPSHOT"
 }
 
 subprojects {
@@ -27,6 +20,27 @@ subprojects {
     }
 }
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.1-2"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.1-2"
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
 File propertiesFile = new File("repo.properties")
 Properties properties = new Properties()
 properties.load(new FileInputStream(propertiesFile))
@@ -37,7 +51,7 @@ project(":elysium-characters-wayward") {
 
     dependencies {
         compile group: "net.wayward-realms", name: "waywardlib", version: "0.12.2"
-        compile group: "com.seventh-root", name: "elysium-characters-bukkit", version: "0.1.0"
+        compile group: "com.seventh-root", name: "elysium-characters-bukkit", version: "0.1.3"
     }
 
     processResources {
@@ -70,7 +84,7 @@ project(":elysium-chat-wayward") {
 
     dependencies {
         compile group: "net.wayward-realms", name: "waywardlib", version: "0.12.2"
-        compile group: "com.seventh-root", name: "elysium-chat-bukkit", version: "0.1.0"
+        compile group: "com.seventh-root", name: "elysium-chat-bukkit", version: "0.1.3"
     }
 
     processResources {
