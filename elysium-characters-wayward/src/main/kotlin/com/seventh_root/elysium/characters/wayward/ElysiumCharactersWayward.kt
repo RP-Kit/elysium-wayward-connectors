@@ -38,8 +38,16 @@ class ElysiumCharactersWayward : JavaPlugin(), CharacterPlugin {
 
     override fun getActiveCharacter(player: OfflinePlayer): Character {
         val elysiumPlayer = elysiumPlayerProvider!!.getPlayer(player)
-        val elysiumCharacter = elysiumCharacterProvider!!.getActiveCharacter(elysiumPlayer)!!
-        return CharacterWrapper(this, elysiumCharacter)
+        val elysiumCharacter = elysiumCharacterProvider!!.getActiveCharacter(elysiumPlayer)
+        if (elysiumCharacter != null) {
+            return CharacterWrapper(this, elysiumCharacter)
+        } else {
+            val character = createNewCharacter(player)
+            if (player.isOnline) {
+                setActiveCharacter(player.player, character)
+            }
+            return character
+        }
     }
 
     override fun setActiveCharacter(player: Player, character: Character) {
@@ -75,7 +83,10 @@ class ElysiumCharactersWayward : JavaPlugin(), CharacterPlugin {
     }
 
     override fun createNewCharacter(player: OfflinePlayer): Character {
-        val character = BukkitCharacter.Builder(elysiumCharactersBukkit!!).player(elysiumPlayerProvider!!.getPlayer(player)).build()
+        val character = BukkitCharacter(
+                plugin = elysiumCharactersBukkit!!,
+                player = elysiumPlayerProvider!!.getPlayer(player)
+        )
         elysiumCharacterProvider!!.addCharacter(character)
         return CharacterWrapper(this, character)
     }

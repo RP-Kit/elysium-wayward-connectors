@@ -4,7 +4,7 @@ allprojects {
     apply plugin: "kotlin"
     apply plugin: "maven"
     group = "com.seventh-root"
-    version = "0.1.1"
+    version = "0.1.2"
 }
 
 subprojects {
@@ -51,7 +51,7 @@ project(":elysium-characters-wayward") {
 
     dependencies {
         compile group: "net.wayward-realms", name: "waywardlib", version: "0.12.2"
-        compile group: "com.seventh-root", name: "elysium-characters-bukkit", version: "0.1.3"
+        compile group: "com.seventh-root", name: "elysium-characters-bukkit", version: "0.1.4"
     }
 
     processResources {
@@ -84,7 +84,7 @@ project(":elysium-chat-wayward") {
 
     dependencies {
         compile group: "net.wayward-realms", name: "waywardlib", version: "0.12.2"
-        compile group: "com.seventh-root", name: "elysium-chat-bukkit", version: "0.1.3"
+        compile group: "com.seventh-root", name: "elysium-chat-bukkit", version: "0.1.4"
     }
 
     processResources {
