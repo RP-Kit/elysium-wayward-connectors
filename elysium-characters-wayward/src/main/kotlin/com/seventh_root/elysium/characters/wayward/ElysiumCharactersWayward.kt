@@ -83,7 +83,10 @@ class ElysiumCharactersWayward : JavaPlugin(), CharacterPlugin {
     }
 
     override fun createNewCharacter(player: OfflinePlayer): Character {
-        val character = BukkitCharacter.Builder(elysiumCharactersBukkit!!).player(elysiumPlayerProvider!!.getPlayer(player)).build()
+        val character = BukkitCharacter(
+                plugin = elysiumCharactersBukkit!!,
+                player = elysiumPlayerProvider!!.getPlayer(player)
+        )
         elysiumCharacterProvider!!.addCharacter(character)
         return CharacterWrapper(this, character)
     }
