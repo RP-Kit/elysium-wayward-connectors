@@ -56,8 +56,12 @@ class CharacterWrapper(private val plugin: ElysiumCharactersWayward, val elysium
 
     }
 
-    override fun getGender(): Gender {
-        return GenderWrapper(elysiumCharacter.gender)
+    override fun getGender(): Gender? {
+        val gender = elysiumCharacter.gender
+        if (gender != null)
+            return GenderWrapper(gender)
+        else
+            return null
     }
 
     override fun setGender(gender: Gender) {
@@ -75,8 +79,12 @@ class CharacterWrapper(private val plugin: ElysiumCharactersWayward, val elysium
 
     }
 
-    override fun getRace(): Race {
-        return RaceWrapper(elysiumCharacter.race)
+    override fun getRace(): Race? {
+        val race = elysiumCharacter.race
+        if (race != null)
+            return RaceWrapper(race)
+        else
+            return null
     }
 
     override fun setRace(race: Race) {
